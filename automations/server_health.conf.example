@@ -1,0 +1,44 @@
+# Copy to server_health.conf and customize.
+
+# Endpoints to test. Include at least one local URL.
+CHECK_URLS=(
+  "http://127.0.0.1/"
+  # "https://yourdomain.com/health"
+)
+
+# Timeout for each network check.
+TIMEOUT_SECONDS=8
+
+# Log inspection settings.
+ERROR_WINDOW_MINUTES=30
+ERROR_TAIL_LINES=400
+
+# If true, automation tries to restart down services.
+AUTO_RESTART_SERVICES=false
+
+# Where to write a copy of each run's report.
+# Leave empty to disable file output.
+REPORT_FILE="/var/log/server-health/latest-report.txt"
+
+# Optional webhook URL for alerts when WARN/FAIL exists.
+# Example: Slack webhook, Discord webhook, custom endpoint.
+ALERT_WEBHOOK_URL=""
+
+# Service detection candidates for your distro.
+APACHE_SERVICE_CANDIDATES=("apache2" "httpd")
+SQL_SERVICE_CANDIDATES=("mysql" "mariadb" "mysqld")
+
+# Process names used as fallback if service units are missing.
+APACHE_PROCESS_CANDIDATES=("apache2" "httpd")
+SQL_PROCESS_CANDIDATES=("mysqld" "mariadbd")
+
+# Log file paths to inspect.
+APACHE_ERROR_LOG_PATHS=(
+  "/var/log/apache2/error.log"
+  "/var/log/httpd/error_log"
+)
+SQL_ERROR_LOG_PATHS=(
+  "/var/log/mysql/error.log"
+  "/var/log/mysql/mysql-error.log"
+  "/var/log/mysqld.log"
+)
